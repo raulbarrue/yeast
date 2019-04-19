@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 import numpy
 
 #Read the dataset
-dataset = pd.read_csv("/dataset/yeast.data", header = None, sep = "\s+")
+dataset = pd.read_csv("./dataset/yeast.data", header = None, sep = "\s+")
 dataset.columns = ["Sequence Name", 
                     "mcg", 
                     "gvh", 
@@ -54,7 +54,7 @@ target_test = to_categorical(target_test)
 n_cols = 8 #number of predictors
 model = Sequential()
 model.add(Dense(100, activation = "relu", input_shape = (n_cols,)))
-model.apythondd(Dense(100, activation = "relu"))
+model.add(Dense(100, activation = "relu"))
 model.add(Dense(100, activation = "relu"))
 model.add(Dense(10, activation = "softmax")) # softmax because it's a classification prediction
 
