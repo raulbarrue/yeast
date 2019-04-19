@@ -5,6 +5,7 @@ from keras.utils import to_categorical
 from keras.optimizers import SGD
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import confusion_matrix
 import numpy
 
 #Read the dataset
@@ -53,6 +54,7 @@ target_test = to_categorical(target_test)
 # Create the model
 n_cols = 8 #number of predictors
 model = Sequential()
+
 model.add(Dense(100, activation = "relu", input_shape = (n_cols,)))
 model.add(Dense(100, activation = "relu"))
 model.add(Dense(100, activation = "relu"))
@@ -60,7 +62,7 @@ model.add(Dense(10, activation = "softmax")) # softmax because it's a classifica
 
 # Compile and fit the model
 model.compile(optimizer = "adam", loss = "categorical_crossentropy", metrics = ["accuracy"])
-model.fit(predictors_train, target_train, epochs = 50)
+model.fit(predictors_train, target_train, epochs = 50, validation_data = (predictors_test, target_test))
 
 # Make predictions
 predictions = model.predict(predictors_test)
