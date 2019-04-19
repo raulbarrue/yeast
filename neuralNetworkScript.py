@@ -62,7 +62,11 @@ model.add(Dense(10, activation = "softmax")) # softmax because it's a classifica
 
 # Compile and fit the model
 model.compile(optimizer = "adam", loss = "categorical_crossentropy", metrics = ["accuracy"])
-model.fit(predictors_train, target_train, epochs = 50, validation_data = (predictors_test, target_test))
+model.fit(predictors_train, target_train, epochs = 50, validation_data = (predictors_test, target_test), verbose = -1)
 
 # Make predictions
-predictions = model.predict(predictors_test)
+#predictions = model.predict(predictors_test)
+
+# Test model accuracy
+score, acc = model.evaluate(predictors_test, target_test, batch_size = 10, verbose = 2)
+print("Test accuracy:", acc)
